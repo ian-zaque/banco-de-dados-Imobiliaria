@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`endereco` (
   `rua` VARCHAR(30) NOT NULL,
   `numero_casa` INT UNSIGNED NOT NULL,
   `CEP` INT UNSIGNED NOT NULL,
-  `complemento` VARCHAR(80) NOT NULL,
+  `complemento` VARCHAR(80),
   `id_bairro` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
@@ -61,14 +61,12 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`pessoa` (
   `sobrenome` VARCHAR(45) NOT NULL,
   `CPF` VARCHAR(11) NOT NULL,
   `id_endereco` INT UNSIGNED NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
   `estado_civil` VARCHAR(15) NOT NULL,
   `sexo` ENUM('F', 'M') NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
   UNIQUE INDEX `CPF_UNIQUE` (`CPF` ASC) ,
   INDEX `id_endereco_idx` (`id_endereco` ASC),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   CONSTRAINT `id_endereco`
     FOREIGN KEY (`id_endereco`)
     REFERENCES `bdImobiliaria`.`endereco` (`ID`)
@@ -78,13 +76,13 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bdImobiliaria`.`cliente_propietario`
+-- Table `bdImobiliaria`.`cliente_proprietario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`cliente_propietario` (
+CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`cliente_proprietario` (
   `profissao` VARCHAR(30) NOT NULL,
   `id_pessoa` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_pessoa`),
-  CONSTRAINT `fk_cliente_propietario_pessoa1`
+  CONSTRAINT `fk_cliente_proprietario_pessoa1`
     FOREIGN KEY (`id_pessoa`)
     REFERENCES `bdImobiliaria`.`pessoa` (`ID`)
     ON DELETE NO ACTION
@@ -97,8 +95,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`fotos` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `foto1` TINYBLOB NOT NULL,
-  `foto2` TINYBLOB NOT NULL,
+  `foto1` TINYBLOB NULL,
+  `foto2` TINYBLOB NULL,
   `foto3` TINYBLOB NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC))
@@ -115,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`imovel` (
   `data_alugado_vendido` DATE NOT NULL,
   `data_postagem` DATE NOT NULL,
   `id_fotos` INT UNSIGNED NOT NULL,
+  `valor_sugerido_cliente_proprietario` DOUBLE NOT NULL,
   `status` ENUM('Disponível para Venda', 'Disponível para Aluguel', 'Vendido', 'Alugado', 'Indisponível') NOT NULL,
   `area` DOUBLE UNSIGNED NOT NULL,
   `categoria` ENUM('Casa', 'Apartamento', 'Sala Comercial', 'Terreno') NOT NULL,
@@ -292,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`relacao_proprietario_imovel` (
     ON UPDATE NO ACTION,
   CONSTRAINT `id_proprietario`
     FOREIGN KEY (`id_proprietario`)
-    REFERENCES `bdImobiliaria`.`cliente_propietario` (`id_pessoa`)
+    REFERENCES `bdImobiliaria`.`cliente_proprietario` (`id_pessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -395,6 +394,62 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`tel_email` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+--
+-- Insercao em bairro
+--
+INSERT INTO `bairro` (`ID`, `nome`) VALUES (3, 'Aviário');
+INSERT INTO `bairro` (`ID`, `nome`) VALUES (4, 'Feira VI');
+INSERT INTO `bairro` (`ID`, `nome`) VALUES (1, 'Parque IPÊ');
+INSERT INTO `bairro` (`ID`, `nome`) VALUES (2, 'Queimadinha');
+
+--
+-- Insercao em Cargo
+--
+INSERT INTO `cargo` (`ID`, `nome`, `salario_base`) VALUES (1, 'Corretor', 1000);
+INSERT INTO `cargo` (`ID`, `nome`, `salario_base`) VALUES (2, 'Gerente', 5000);
+INSERT INTO `cargo` (`ID`, `nome`, `salario_base`) VALUES (3, 'Sub-gerente', 3000);
+
+INSERT INTO `pessoa` (`ID`, `nome`, `sobrenome`, `CPF`, `id_endereco`, `estado_civil`, `sexo`) VALUES (1, 'Francisco Hugo', 'Rezende', '92546317599', 1, 'Solteiro', 'M');
+INSERT INTO `pessoa` (`ID`, `nome`, `sobrenome`, `CPF`, `id_endereco`, `estado_civil`, `sexo`) VALUES (2, 'Gabriel ', 'Medina', '92546317598', 2, 'Casado', 'M');
+INSERT INTO `pessoa` (`ID`, `nome`, `sobrenome`, `CPF`, `id_endereco`, `estado_civil`, `sexo`) VALUES (3, 'Fátima ', 'Bernardes', '92546317597', 3, 'Casada', 'F');
+INSERT INTO `pessoa` (`ID`, `nome`, `sobrenome`, `CPF`, `id_endereco`, `estado_civil`, `sexo`) VALUES (4, 'Ruan', 'Portos', '92546317592', 4, 'Solteiro', 'M');
+
+--
+-- Insercao em cliente_proprietario
+--
+INSERT INTO `cliente_proprietario` (`profissao`, `id_pessoa`) VALUES ('Carpinteiro', 1);
+
+--
+-- Insercao em cliente_usuario
+--
+INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('1', 'Flávio Augusto', 'José Kepler', 'Armando Cerqueira', 2);
+
+--
+-- Insercao em endereco
+--
+INSERT INTO `endereco` (`ID`, `rua`, `numero_casa`, `CEP`, `complemento`, `id_bairro`) VALUES (1, 'Rua A', 100, 4405456, 'Perto do posto Ipiranga', 1);
+INSERT INTO `endereco` (`ID`, `rua`, `numero_casa`, `CEP`, `complemento`, `id_bairro`) VALUES (2, 'Rua B', 200, 4405457, 'Perto do posto Texaco', 2);
+INSERT INTO `endereco` (`ID`, `rua`, `numero_casa`, `CEP`, `complemento`, `id_bairro`) VALUES (3, 'Rua C', 300, 4405458, 'Em frente a casa roxa', 4);
+INSERT INTO `endereco` (`ID`, `rua`, `numero_casa`, `CEP`, `complemento`, `id_bairro`) VALUES (4, 'Rua D', 400, 4405457, 'Próximo a policlínica', 3);
+
+--
+-- Insercao em funcionario
+--
+INSERT INTO `funcionario` (`id_cargo`, `usuario`, `senha`, `data_ingresso`, `id_pessoa`) VALUES (1, 'funcionario', 'funcionariosenha', '2020-03-01', 3);
+
+--
+-- Insercao em pagamento
+--
+INSERT INTO `pagamento` (`ID`, `valor`, `forma_pagamento`) VALUES (1, 100, 'Boleto');
+INSERT INTO `pagamento` (`ID`, `valor`, `forma_pagamento`) VALUES (2, 150, 'Cartão');
+
+--
+-- Insercao em tel_email
+--
+INSERT INTO `tel_email` (`ID`, `id_pessoa`, `telefone_contato`, `telefone_celular`, `email`) VALUES (1, 1, '557552366587', '557511254785', 'francis@macio.com');
+INSERT INTO `tel_email` (`ID`, `id_pessoa`, `telefone_contato`, `telefone_celular`, `email`) VALUES (2, 2, '557588596584', '557511245698', 'medina@life.com');
+INSERT INTO `tel_email` (`ID`, `id_pessoa`, `telefone_contato`, `telefone_celular`, `email`) VALUES (3, 3, '557599984572', '557566635289', 'fbernardes@something.com');
+INSERT INTO `tel_email` (`ID`, `id_pessoa`, `telefone_contato`, `telefone_celular`, `email`) VALUES (4, 4, '557588845724', '557599986523', 'ruan@algo.com');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
