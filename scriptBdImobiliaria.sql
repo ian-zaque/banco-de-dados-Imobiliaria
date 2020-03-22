@@ -302,14 +302,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`relacao_cliente_usuario_imovel` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_imovel` INT UNSIGNED NOT NULL,
+  `id_imovel_usuario` INT UNSIGNED NOT NULL,
   `id_cliente_usuario` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
-  INDEX `id_imovel_idx` (`id_imovel` ASC),
+  INDEX `id_imovel_usuario_idx` (`id_imovel_usuario` ASC),
   INDEX `id_cliente_usuario_idx` (`id_cliente_usuario` ASC),
-  CONSTRAINT `id_imovel`
-    FOREIGN KEY (`id_imovel`)
+  CONSTRAINT `id_imovel_usuario`
+    FOREIGN KEY (`id_imovel_usuario`)
     REFERENCES `bdImobiliaria`.`imovel` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
