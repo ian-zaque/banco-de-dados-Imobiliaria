@@ -195,7 +195,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`casa` (
   `qntd_quarto` INT UNSIGNED NOT NULL,
-  `qndtd_suite` INT UNSIGNED NOT NULL,
+  `qntd_suite` INT UNSIGNED NOT NULL,
   `qntd_sala_estar` INT UNSIGNED NOT NULL,
   `qntd_sala_jantar` INT UNSIGNED NOT NULL,
   `nmro_vagas` INT UNSIGNED NOT NULL,
@@ -510,9 +510,9 @@ INSERT INTO `terreno` (`largura`, `comprimento`, `tipo_inclinacao`, `id_terreno`
 --
 -- Insercao em cliente_usuario
 --
-INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('1', 'Flávio Augusto', 'José Kepler', 'Armando Cerqueira', 4);
-INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('2', 'César Zeppeli', 'Tiago Von Stronheim', 'Elen Silva', 5);
-INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('1', 'Manuel Marques', 'José Santana Dias', 'Silvan Queiroz', 6);
+INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('Ruan Portos', 'Flávio Augusto', 'José Kepler', 'Armando Cerqueira', 4);
+INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('Jonathan Joestar', 'César Zeppeli', 'Tiago Von Stronheim', 'Elen Silva', 5);
+INSERT INTO `cliente_usuario` (`fiador1`, `indicacao1`, `indicacao2`, `indicacao3`, `id_pessoa`) VALUES ('Erina Pendrosa', 'Manuel Marques', 'José Santana Dias', 'Silvan Queiroz', 6);
 
 --
 -- Insercao em funcionario
