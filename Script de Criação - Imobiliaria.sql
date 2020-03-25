@@ -483,9 +483,9 @@ INSERT INTO `imovel` (`ID`, `id_endereco`, `data_construcao`, `data_alugado_vend
 --
 -- Insercao em Casa
 --
-INSERT INTO `casa` (`qntd_quarto`, `qndtd_suite`, `qntd_sala_estar`, `qntd_sala_jantar`, `nmro_vagas`, `has_armario_embutido`, `descricao`, `id_casa`) 
+INSERT INTO `casa` (`qntd_quarto`, `qntd_suite`, `qntd_sala_estar`, `qntd_sala_jantar`, `nmro_vagas`, `has_armario_embutido`, `descricao`, `id_casa`) 
               VALUES (3, 1, 2, 1, 2, 1, 'Bela Casa 3/4 com Suíte, 2 garagens e 2 enormes salas de jantar', 1);
-INSERT INTO `casa` (`qntd_quarto`, `qndtd_suite`, `qntd_sala_estar`, `qntd_sala_jantar`, `nmro_vagas`, `has_armario_embutido`, `descricao`, `id_casa`) 
+INSERT INTO `casa` (`qntd_quarto`, `qntd_suite`, `qntd_sala_estar`, `qntd_sala_jantar`, `nmro_vagas`, `has_armario_embutido`, `descricao`, `id_casa`) 
              VALUES (5, 2, 1, 1, 3, 1, 'Mansão bonita e de belo jardim! Com 5/4 e 2 grandes suítes, 3 vagas na garagem e com um belo armário', 5);
 
 --
