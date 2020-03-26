@@ -401,6 +401,37 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`tel_email` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `bdImobiliaria`.`historico`
+-- ----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`historico` (
+ `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_endereco_hist` INT UNSIGNED NOT NULL,
+  `data_construcao` DATE NOT NULL,
+  `data_alugado_vendido` DATE NULL,
+  `data_postagem` DATE NOT NULL,
+  `id_fotos_hist` INT UNSIGNED NOT NULL,
+  `valor_sugerido_cliente_proprietario` DOUBLE NOT NULL,
+  `status` ENUM('Disponível para Venda', 'Disponível para Aluguel', 'Vendido', 'Alugado', 'Indisponível') NOT NULL,
+  `area` DOUBLE UNSIGNED NOT NULL,
+  `categoria` ENUM('Casa', 'Apartamento', 'Sala Comercial', 'Terreno') NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),
+  UNIQUE INDEX `endereco_UNIQUE` (`id_endereco_hist` ASC),
+  UNIQUE INDEX `id_fotos_UNIQUE` (`id_fotos_hist` ASC),
+  CONSTRAINT `id_endereco_hist`
+    FOREIGN KEY (`id_endereco_hist`)
+    REFERENCES `bdImobiliaria`.`endereco` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_fotos_hist`
+    FOREIGN KEY (`id_fotos_hist`)
+    REFERENCES `bdImobiliaria`.`fotos` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 --
 -- Insercao em bairro
 --
