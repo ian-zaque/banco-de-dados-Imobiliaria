@@ -219,6 +219,13 @@ CREATE TABLE IF NOT EXISTS `bdImobiliaria`.`apartamento` (
   `valor_condominio` DOUBLE UNSIGNED NOT NULL,
   `has_portaria` TINYINT NOT NULL,
   `id_apartamento` INT UNSIGNED NOT NULL,
+  `qntd_quarto` INT UNSIGNED NOT NULL,
+  `qntd_suite` INT UNSIGNED NOT NULL,
+  `qntd_sala_estar` INT UNSIGNED NOT NULL,
+  `qntd_sala_jantar` INT UNSIGNED NOT NULL,
+  `nmro_vagas` INT UNSIGNED NOT NULL,
+  `has_armario_embutido` TINYINT NOT NULL,
+  `descricao` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id_apartamento`),
   CONSTRAINT `fk_apartamento_casa1`
     FOREIGN KEY (`id_apartamento`)
@@ -472,7 +479,7 @@ INSERT INTO `imovel` (`ID`, `id_endereco`, `data_construcao`, `data_alugado_vend
 INSERT INTO `imovel` (`ID`, `id_endereco`, `data_construcao`, `data_alugado_vendido`, `data_postagem`, `id_fotos`, `valor_sugerido_cliente_proprietario`, `status`, `area`, `categoria`) 
              VALUES (5, 5, '2013-01-01', '2019-12-23', '2017-03-10', 5, 800000, 'Vendido', 550, 'Casa');
 INSERT INTO `imovel` (`ID`, `id_endereco`, `data_construcao`, `data_alugado_vendido`, `data_postagem`, `id_fotos`, `valor_sugerido_cliente_proprietario`, `status`, `area`, `categoria`) 
-             VALUES (6, 6, '2005-04-18', '2019-08-16', '2018-08-06', 6, 1900, 'Alugado', 300, 'Sala Comercial');
+             VALUES (6, 6, '2005-04-18', '2019-08-16', '2018-08-06', 6, 1900, 'Alugado', 300, 'Apartamento');
 INSERT INTO `imovel` (`ID`, `id_endereco`, `data_construcao`, `data_alugado_vendido`, `data_postagem`, `id_fotos`, `valor_sugerido_cliente_proprietario`, `status`, `area`, `categoria`) 
              VALUES (7, 7, '2010-06-02', NULL, '2017-06-09', 7, 200000, 'Disponível para Venda', 355, 'Terreno');
 INSERT INTO `imovel` (`ID`, `id_endereco`, `data_construcao`, `data_alugado_vendido`, `data_postagem`, `id_fotos`, `valor_sugerido_cliente_proprietario`, `status`, `area`, `categoria`) 
@@ -491,8 +498,10 @@ INSERT INTO `casa` (`qntd_quarto`, `qntd_suite`, `qntd_sala_estar`, `qntd_sala_j
 --
 -- Insercao em apartamento
 --
-INSERT INTO `apartamento` (`andar`, `valor_condominio`, `has_portaria`, `id_apartamento`) VALUES (5, 4500, 1, 2);
-INSERT INTO `apartamento` (`andar`, `valor_condominio`, `has_portaria`, `id_apartamento`) VALUES (8, 3000, 1, 6);
+INSERT INTO `apartamento` (`qntd_quarto`, `qntd_suite`, `qntd_sala_estar`, `qntd_sala_jantar`, `nmro_vagas`, `has_armario_embutido`,
+                          `andar`, `valor_condominio`, `has_portaria`, `id_apartamento`,`descricao`) VALUES (2,1,2,1,1,2, 5, 4500, 1, 2,'Apartamento grande com 2/4 e armário embutido');
+INSERT INTO `apartamento` (`qntd_quarto`, `qntd_suite`, `qntd_sala_estar`, `qntd_sala_jantar`, `nmro_vagas`, `has_armario_embutido`,
+                          `andar`, `valor_condominio`, `has_portaria`, `id_apartamento`,`descricao`) VALUES (3,2,1,2,2,1, 8, 3000, 1, 6,'Apartamento magnífico com 3/4 e 2 garagens');
 
 --
 -- Insercao em sala_comercial
